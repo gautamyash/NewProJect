@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import ErrorModal from "../UI/ErrorModal";
 import classes from "./AddUser.module.css";
 const AddUser = (props) => {
+  const collegeInputRef = useRef();
   const [enteredUsername, setEnteredUsername] = useState("");
   const [enteredAge, setEnteredAge] = useState("");
   const [error, setError] = useState();
@@ -25,9 +26,11 @@ const AddUser = (props) => {
       });
       return;
     }
-    props.onAddUser(enteredUsername, enteredAge);
+    props.onAddUser(enteredUsername, enteredAge, collegeInputRef.current.value);
+
     setEnteredUsername("");
     setEnteredAge("");
+    collegeInputRef.current.value = "";
   };
 
   const usernameChangeHandler = (event) => {
@@ -67,6 +70,8 @@ const AddUser = (props) => {
             value={enteredAge}
             onChange={ageChangeHandler}
           />
+          <label htmlFor="college">College Name</label>
+          <input id="collegename" type="text" ref={collegeInputRef} />
           <Button type="submit">Add User</Button>
         </form>
       </Card>

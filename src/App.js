@@ -4,10 +4,15 @@ import ListItem from "./components/Add User/ListItem";
 
 function App() {
   const [userslist, setUsersList] = useState([]);
-  const onListHandler = (uName, uAge) => {
+  const onListHandler = (uName, uAge, uCollege) => {
     setUsersList((prevUser) => [
       ...prevUser,
-      { name: uName, age: uAge, id: Math.random().toString() },
+      {
+        name: uName,
+        age: uAge,
+        id: Math.random().toString(),
+        college: uCollege,
+      },
     ]);
   };
 
